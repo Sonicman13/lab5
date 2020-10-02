@@ -4,7 +4,7 @@ public class Store {
     String name;
     String adress;
     int numberOfItems;
-    Item item[];
+    Item[] item = new Item[10];
     void read(){
         int f,i;
         String encoding = System.getProperty("console.encoding", "cp866");
@@ -17,6 +17,7 @@ public class Store {
         f = in.nextInt();
         i = 0;
         while(f == 1){
+            item[i] = new Item();
             item[i].read();
             i++;
             System.out.println("Добавить товар(1 - да, 0 - нет)");
@@ -43,6 +44,7 @@ public class Store {
         }
     }
     void add(){
+        item[numberOfItems] = new Item();
         item[numberOfItems].read();
         numberOfItems++;
     }
