@@ -51,7 +51,7 @@ public class Store {
     void priceChange(String code1, double price1){
         int i = 0;
         while(i < numberOfItems){
-            if(item[i].getCode() == code1){
+            if(code1.equals(item[i].getCode())){
                 item[i].setPrice(price1);
                 i = numberOfItems;
             }
@@ -61,7 +61,7 @@ public class Store {
     void amountChange(String code1, int amount1){
          int i = 0;
         while(i < numberOfItems){
-            if(item[i].getCode() == code1){
+            if(code1.equals(item[i].getCode())){
                 item[i].setAmount(amount1);
                 i = numberOfItems;
             }
@@ -71,12 +71,12 @@ public class Store {
     void displayName(){
         System.out.println("Магазин:" + name);
     }
-    int storecmp(String name1){
-       if(name == name1){
-           return 1;
+    boolean storecmp(String name1){
+       if(name.equals(name1)){
+           return true;
        }
        else {
-           return 0;
+           return false;
        }
     }
 } 
