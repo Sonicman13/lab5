@@ -48,21 +48,21 @@ public class Store {
         item[numberOfItems].read();
         numberOfItems++;
     }
-    void priceChange(String code1, double price1){
+    void priceChange(String code, double price){
         int i = 0;
         while(i < numberOfItems){
-            if(code1.equals(item[i].getCode())){
-                item[i].setPrice(price1);
+            if(code.equals(item[i].getCode())){
+                item[i].setPrice(price);
                 i = numberOfItems;
             }
             i++;
         }
     }
-    void amountChange(String code1, int amount1){
+    void amountChange(String code, int amount){
          int i = 0;
         while(i < numberOfItems){
-            if(code1.equals(item[i].getCode())){
-                item[i].setAmount(amount1);
+            if(code.equals(item[i].getCode())){
+                item[i].setAmount(amount);
                 i = numberOfItems;
             }
             i++;
@@ -78,5 +78,8 @@ public class Store {
        else {
            return false;
        }
+    }
+    void getNumber(Number k){
+        k.number = numberOfItems;
     }
 } 

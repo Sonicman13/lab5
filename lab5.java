@@ -6,6 +6,7 @@ public class lab5 {
         Scanner in = new Scanner(System.in, encoding);
         Store[] store = new Store[10];
         Item[] item = new Item[10];
+        Number k = new Number();
         int numberOfItems1, amount1, i, max, n;
         double price1;
         System.out.println("Ввести данные через read или init(1 - read, 2 - init)");
@@ -45,7 +46,7 @@ public class lab5 {
         f = "0";
         i = 0;
         max = 1;
-        while(f.equals("8") == false){
+        while(f.equals("9") == false){
             System.out.println("Введите номер следующего действия");
             System.out.println("1 - показать информацию о магазине");
             System.out.println("2 - добавить новый вид товара");
@@ -54,7 +55,8 @@ public class lab5 {
             System.out.println("5 - Добавить магазин");
             System.out.println("6 - показать все магазины");
             System.out.println("7 - сменить магазин");
-            System.out.println("8 - выйти");
+            System.out.println("8 - показать колличество товаров");
+            System.out.println("9 - выйти");
             f = in.nextLine();
             if(f.equals("1")){
                 store[i].display();
@@ -98,6 +100,10 @@ public class lab5 {
                         n = max;
                     }
                 }
+            }
+            else if(f.equals("8")){
+                store[i].getNumber(k);
+                System.out.println(k.number);
             }
         }    
     }
