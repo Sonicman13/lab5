@@ -4,6 +4,7 @@ public class Store {
     String name;
     String adress;
     int numberOfItems;
+    static int maxNumberOfItems = 10;
     Item[] item = new Item[10];
     void read(){
         int f,i;
@@ -16,7 +17,7 @@ public class Store {
         System.out.println("Добавить товар(1 - да, 0 - нет)");
         f = in.nextInt();
         i = 0;
-        while(f == 1){
+        while(f == 1 && i < maxNumberOfItems){
             item[i] = new Item();
             item[i].read();
             i++;
@@ -26,11 +27,13 @@ public class Store {
         numberOfItems = i;
     }
     void init(String name1, String adress1, int numberOfItems1, Item item1[]){
-        name = name1;
-        adress = adress1;
-        numberOfItems = numberOfItems1;
-        for(numberOfItems1 = 0; numberOfItems1 < numberOfItems; numberOfItems1++){
-            item[numberOfItems1] = item1[numberOfItems1];
+        if(numberOfItems1 <= maxNumberOfItems){
+            name = name1;
+            adress = adress1;
+            numberOfItems = numberOfItems1;
+            for(numberOfItems1 = 0; numberOfItems1 < numberOfItems; numberOfItems1++){
+                item[numberOfItems1] = item1[numberOfItems1];
+            }
         }
     }
     void display(){
@@ -38,15 +41,18 @@ public class Store {
         System.out.println("Название магазина:" + name);
         System.out.println("Адрес магазина:" + adress);
         System.out.println("Колличество товаров:" + numberOfItems);
+        System.out.println("Колличество мест для товаров:" + maxNumberOfItems);
         for(i = 0;i < numberOfItems; i++){
             System.out.println("Товар:" + (i+1));
             item[i].display();
         }
     }
     void add(){
-        item[numberOfItems] = new Item();
-        item[numberOfItems].read();
-        numberOfItems++;
+        if(numberOfItems < maxNumberOfItems){
+            item[numberOfItems] = new Item();
+            item[numberOfItems].read();
+            numberOfItems++;
+        }
     }
     void priceChange(String code, double price){
         int i = 0;
@@ -81,5 +87,8 @@ public class Store {
     }
     void getNumber(Number k){
         k.number = numberOfItems;
+    }
+    static void maxNumberOfItemsChange(int newMax){
+        maxNumberOfItems = newMax;
     }
 } 
