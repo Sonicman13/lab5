@@ -26,7 +26,7 @@ public class Store {
         }
         numberOfItems = i;
     }
-    void init(String name1, String adress1, int numberOfItems1, Item item1[]){
+    Store(String name1, String adress1, int numberOfItems1, Item item1[]){
         if(numberOfItems1 <= maxNumberOfItems){
             name = name1;
             adress = adress1;
@@ -35,6 +35,16 @@ public class Store {
                 item[numberOfItems1] = item1[numberOfItems1];
             }
         }
+    }
+    Store(String name1){
+        name = name1;
+        adress = "-";
+        numberOfItems = 0;
+    }
+    Store(){
+        name = "-";
+        adress = "-";
+        numberOfItems = 0;
     }
     void display(){
         int i;

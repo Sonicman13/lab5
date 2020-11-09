@@ -17,11 +17,17 @@ public class Item {
         System.out.println("Введите колличество");
         amount = in.nextInt();
     }
-    void init(String code1, String name1, double price1, int amount1){
+    Item(String code1, String name1, double price1, int amount1){
         code = code1;
         name = name1;
         price = price1;
         amount = amount1;
+    }
+    Item(){
+        code = "-";
+        name = "-";
+        price = 0;
+        amount = 0;
     }
     void display(){
         System.out.println("Название товара:" + name);

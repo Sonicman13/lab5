@@ -16,32 +16,42 @@ public class lab5 {
             store[0].read();
         }
         else{
-            System.out.println("Введите название магазина");
-            name1 = in.nextLine();
-            System.out.println("Введите адрес магазина");
-            adress1 = in.nextLine();
-            System.out.println("Добавить товар(1 - да, 0 - нет)");
+            System.out.println("Ввести все параметры (1), ввести только название (2), не вводить параметры (3)");
             f = in.nextLine();
-            i = 0;
-            while(f.equals("1")){
-                System.out.println("Введите название товара");
-                nameItem1 = in.nextLine();
-                System.out.println("Введите код товара");
-                code1 = in.nextLine();
-                System.out.println("Введите цену");
-                price1 = in.nextDouble();
-                System.out.println("Введите колличество");
-                amount1 = in.nextInt();
-                in.nextLine();
-                item[i] = new Item();
-                item[i].init(code1, nameItem1, price1, amount1);
-                i++;
+            if(f.equals("1")){
+                System.out.println("Введите название магазина");
+                name1 = in.nextLine();
+                System.out.println("Введите адрес магазина");
+                adress1 = in.nextLine();
                 System.out.println("Добавить товар(1 - да, 0 - нет)");
                 f = in.nextLine();
+                i = 0;
+                while(f.equals("1")){
+                    System.out.println("Введите название товара");
+                    nameItem1 = in.nextLine();
+                    System.out.println("Введите код товара");
+                    code1 = in.nextLine();
+                    System.out.println("Введите цену");
+                    price1 = in.nextDouble();
+                    System.out.println("Введите колличество");
+                    amount1 = in.nextInt();
+                    in.nextLine();
+                    item[i] = new Item(code1, nameItem1, price1, amount1);
+                    i++;
+                    System.out.println("Добавить товар(1 - да, 0 - нет)");
+                    f = in.nextLine();
+                }
+                numberOfItems1 = i;
+                store[0] = new Store(name1, adress1, numberOfItems1, item);
             }
-            numberOfItems1 = i;
-            store[0] = new Store();
-            store[0].init(name1, adress1, numberOfItems1, item);
+            else if(f.equals("2")){
+                System.out.println("Введите название магазина");
+                name1 = in.nextLine();
+                store[0] = new Store(name1);
+            }
+            else{
+                store[0] = new Store();
+            }
         }
         f = "0";
         i = 0;
@@ -110,6 +120,7 @@ public class lab5 {
                 System.out.println("Введите колличество");
                 numberOfItems1 = in.nextInt();
                 Store.maxNumberOfItemsChange(numberOfItems1);
+                in.nextLine();
             }
         }    
     }
