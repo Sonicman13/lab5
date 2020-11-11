@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.*;
 
 public class Item {
     String name;
@@ -12,10 +13,22 @@ public class Item {
         name = in.nextLine();
         System.out.println("¬ведите код товара");
         code = in.nextLine();
-        System.out.println("¬ведите цену");
-        price = in.nextDouble();
-        System.out.println("¬ведите колличество");
-        amount = in.nextInt();
+        try{
+            System.out.println("¬ведите цену");
+            price = in.nextDouble();
+        }
+        catch(InputMismatchException ex){
+            price = 0;
+            in.nextLine();
+        }
+        try{
+            System.out.println("¬ведите колличество");
+            amount = in.nextInt();
+        }
+        catch(InputMismatchException ex){
+            amount = 0;
+            in.nextLine();
+        }
     }
     Item(String code1, String name1, double price1, int amount1){
         code = code1;

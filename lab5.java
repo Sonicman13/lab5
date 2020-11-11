@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.*;
 
 public class lab5 {
     public static void main(String[] args) {
@@ -31,10 +32,21 @@ public class lab5 {
                     nameItem1 = in.nextLine();
                     System.out.println("¬ведите код товара");
                     code1 = in.nextLine();
-                    System.out.println("¬ведите цену");
-                    price1 = in.nextDouble();
-                    System.out.println("¬ведите колличество");
-                    amount1 = in.nextInt();
+                    try{
+                        System.out.println("¬ведите цену");
+                        price1 = in.nextDouble();
+                    }
+                    catch(InputMismatchException ex){
+                        price1 = 0;
+                        in.nextLine();
+                    }
+                    try{
+                        System.out.println("¬ведите колличество");
+                        amount1 = in.nextInt();
+                    }
+                    catch(InputMismatchException ex){
+                        amount1 = 0;
+                    }
                     in.nextLine();
                     item[i] = new Item(code1, nameItem1, price1, amount1);
                     i++;
@@ -79,7 +91,12 @@ public class lab5 {
                 System.out.println("¬ведите код товара");
                 code1 = in.nextLine();
                 System.out.println("¬ведите новую цену");
-                price1 = in.nextDouble();
+                try{
+                    price1 = in.nextDouble();
+                }
+                catch(InputMismatchException ex){
+                    price1 = 0;
+                }
                 in.nextLine();
                 store[i].priceChange(code1, price1);
             }
@@ -87,7 +104,12 @@ public class lab5 {
                 System.out.println("¬ведите код товара");
                 code1 = in.nextLine();
                 System.out.println("¬ведите на сколько изменилось колличество товара(если увеличилость - положительное число, если уменьшилось - отрицательное)");
-                amount1 = in.nextInt();
+                try{
+                    amount1 = in.nextInt();
+                }
+                catch(InputMismatchException ex){
+                    amount1 = 0;
+                }
                 in.nextLine();
                 store[i].amountChange(code1, amount1);
             }
