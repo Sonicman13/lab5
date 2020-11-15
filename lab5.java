@@ -36,7 +36,7 @@ public class lab5 {
                         System.out.println("¬ведите цену");
                         price1 = in.nextDouble();
                     }
-                    catch(InputMismatchException ex){
+                    catch(Exception e){
                         price1 = 0;
                         in.nextLine();
                     }
@@ -44,7 +44,7 @@ public class lab5 {
                         System.out.println("¬ведите колличество");
                         amount1 = in.nextInt();
                     }
-                    catch(InputMismatchException ex){
+                    catch(Exception e){
                         amount1 = 0;
                     }
                     in.nextLine();
@@ -94,7 +94,7 @@ public class lab5 {
                 try{
                     price1 = in.nextDouble();
                 }
-                catch(InputMismatchException ex){
+                catch(Exception e){
                     price1 = 0;
                 }
                 in.nextLine();
@@ -107,7 +107,7 @@ public class lab5 {
                 try{
                     amount1 = in.nextInt();
                 }
-                catch(InputMismatchException ex){
+                catch(Exception e){
                     amount1 = 0;
                 }
                 in.nextLine();

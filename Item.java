@@ -17,7 +17,7 @@ public class Item {
             System.out.println("¬ведите цену");
             price = in.nextDouble();
         }
-        catch(InputMismatchException ex){
+        catch(Exception e){
             price = 0;
             in.nextLine();
         }
@@ -25,7 +25,7 @@ public class Item {
             System.out.println("¬ведите колличество");
             amount = in.nextInt();
         }
-        catch(InputMismatchException ex){
+        catch(Exception e){
             amount = 0;
             in.nextLine();
         }
