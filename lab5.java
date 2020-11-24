@@ -3,12 +3,16 @@ import java.util.*;
 
 public class lab5 {
     public static void main(String[] args) {
-        String encoding = System.getProperty("console.encoding", "cp866"), name1, adress1, nameItem1, code1, f;
+        String encoding = System.getProperty("console.encoding", "cp866"), name1, adress1, nameItem1, code1, f, publisher;
+        String[] platforms = new String[10], components = new String[10], plusPlatforms = new String[10];
         Scanner in = new Scanner(System.in, encoding);
         Store[] store = new Store[10];
-        Item[] item = new Item[10];
+        Item[] item1 = new Item[10];
+        Game[] game1 = new Game[10];
+        Platform[] platform1 = new Platform[10];
         Number k = new Number();
-        int numberOfItems1, amount1, i, max, n;
+        int numberOfItems1, amount1, i, max, n, d, numberOfGames1, numberOfPlatforms1;
+        int[] release = new int[3];
         double price1;
         System.out.println("Ввести данные через read или init(1 - read, 2 - init)");
         f = in.nextLine();
@@ -48,13 +52,104 @@ public class lab5 {
                         amount1 = 0;
                     }
                     in.nextLine();
-                    item[i] = new Item(code1, nameItem1, price1, amount1);
+                    item1[i] = new Item(code1, nameItem1, price1, amount1);
                     i++;
                     System.out.println("Добавить товар(1 - да, 0 - нет)");
                     f = in.nextLine();
                 }
                 numberOfItems1 = i;
-                store[0] = new Store(name1, adress1, numberOfItems1, item);
+                System.out.println("Добавить игру(1 - да, 0 - нет)");
+                f = in.nextLine();
+                i = 0;
+                while(f.equals("1")){
+                    System.out.println("Введите название товара");
+                    nameItem1 = in.nextLine();
+                    System.out.println("Введите код товара");
+                    code1 = in.nextLine();
+                    try{
+                        System.out.println("Введите цену");
+                        price1 = in.nextDouble();
+                    }
+                    catch(Exception e){
+                        price1 = 0;
+                        in.nextLine();
+                    }
+                    try{
+                        System.out.println("Введите колличество");
+                        amount1 = in.nextInt();
+                    }
+                    catch(Exception e){
+                        amount1 = 0;
+                    }
+                    System.out.println("Введите дату выхода(день, месяц(число), затем год(4 цифры), разделяя их нажатием Enter)");
+                    release[0] = in.nextInt();
+                    release[1] = in.nextInt();
+                    release[2] = in.nextInt();
+                    in.nextLine();
+                    System.out.println("Введите платформы на которых доступна игра( чтобы закончить вводить платформы введите пустую строку)");
+                    d = -1;
+                    do
+                    {
+                        d++;
+                        platforms[d] = in.nextLine();
+                    } while (!platforms[d].equals(""));
+                    System.out.println("Введите издателя");
+                    publisher = in.nextLine();
+                    in.nextLine();
+                    game1[i] = new Game(code1, nameItem1, price1, amount1, release, platforms, publisher);
+                    i++;
+                    System.out.println("Добавить игру(1 - да, 0 - нет)");
+                    f = in.nextLine();
+                }
+                numberOfGames1 = i;
+                System.out.println("Добавить консоль(1 - да, 0 - нет)");
+                f = in.nextLine();
+                i = 0;
+                while(f.equals("1")){
+                    System.out.println("Введите название товара");
+                    nameItem1 = in.nextLine();
+                    System.out.println("Введите код товара");
+                    code1 = in.nextLine();
+                    try{
+                        System.out.println("Введите цену");
+                        price1 = in.nextDouble();
+                    }
+                    catch(Exception e){
+                        price1 = 0;
+                        in.nextLine();
+                    }
+                    try{
+                        System.out.println("Введите колличество");
+                        amount1 = in.nextInt();
+                    }
+                    catch(Exception e){
+                        amount1 = 0;
+                    }
+                    in.nextLine();
+                    System.out.println("Введите комплектацию( чтобы закончить вводить комплектацию введите пустую строку)");
+                    d = -1;
+                    do
+                    {
+                        d++;
+                        components[d] = in.nextLine();
+                    } while (!components[d].equals(""));
+                    System.out.println("Введите платформы доступные по обратной совместимости( чтобы закончить вводить платформы введите пустую строку)");
+                    d = -1;
+                    do
+                    {
+                        d++;
+                        plusPlatforms[d] = in.nextLine();
+                    } while (!plusPlatforms[d].equals(""));
+                    System.out.println("Введите издателя");
+                    publisher = in.nextLine();
+                    in.nextLine();
+                    platform1[i] = new Platform(code1, nameItem1, price1, amount1, components, plusPlatforms, publisher);
+                    i++;
+                    System.out.println("Добавить консоль(1 - да, 0 - нет)");
+                    f = in.nextLine();
+                }
+                numberOfPlatforms1 = i;
+                store[0] = new Store(name1, adress1, numberOfItems1, item1, numberOfGames1, game1, numberOfPlatforms1, platform1);
             }
             else if(f.equals("2")){
                 System.out.println("Введите название магазина");
@@ -77,8 +172,8 @@ public class lab5 {
             System.out.println("5 - Добавить магазин");
             System.out.println("6 - показать все магазины");
             System.out.println("7 - сменить магазин");
-            System.out.println("8 - показать колличество товаров");
-            System.out.println("9 - изменить колличество мест для товаров в магазине");
+            System.out.println("8 - добавить комплектующие к консоли или платформы на которых доступна игра");
+            System.out.println("9 - клонирование");
             System.out.println("10 - выйти");
             f = in.nextLine();
             if(f.equals("1")){
@@ -135,14 +230,23 @@ public class lab5 {
                 }
             }
             else if(f.equals("8")){
-                store[i].getNumber(k);
-                System.out.println(k.number);
+                System.out.println("Введите код товара");
+                code1 = in.nextLine();
+                store[i].add(code1);
             }
             else if(f.equals("9")){
-                System.out.println("Введите колличество");
-                numberOfItems1 = in.nextInt();
-                Store.maxNumberOfItemsChange(numberOfItems1);
-                in.nextLine();
+                release[0] = release[1] = release[2] = 1;
+                platforms[0] = "aaa";
+                game1[0] = new Game("game", "game", 1, 1, release, platforms, "game");
+                components[0] = "bbb";
+                platforms[0] = "zzz";
+                platform1[0] = new Platform("platform", "platform", 2, 2, components, platforms, "platform");
+                game1[1] = game1[0];
+                game1[1].setAmount(2);
+                game1[0].display();
+                platform1[1] = platform1[0];
+                platform1[1].setAmount(3);
+                platform1[0].display();
             }
         }    
     }

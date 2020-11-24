@@ -1,11 +1,16 @@
 import java.util.Scanner;
 import java.util.*;
 
+interface Add
+{
+    void add();
+}
+
 public class Item {
-    String name;
-    String code;
-    double price;
-    int amount;
+    protected String name;
+    protected String code;
+    protected double price;
+    protected int amount;
     void read() {
         String encoding = System.getProperty("console.encoding", "cp866");
         Scanner in = new Scanner(System.in, encoding);
@@ -61,3 +66,192 @@ public class Item {
         return amount;
     }
 }
+
+
+
+class Game extends Item
+implements Add, Cloneable
+    {
+        int[] release = new int[3];
+        String[] platforms = new String[10];
+        String publisher;
+        Game()
+        {
+            name = "-";
+            code = "-";
+            price = 0;
+            amount = 0;
+            release[0] = release[1] = release[2] = -1;
+            platforms[0] = "-";
+            publisher = "-";
+        }
+        Game(String code, String name, double price, int amount, int[] release1, String[] platforms1, String publisher1)
+        {
+            super(code, name, price, amount);
+            int i;
+            for (i = 0; i < 3; i++)
+            {
+                release[i] = release1[i];
+            }
+            for (i = 0; i < platforms1.length; i++)
+            {
+                platforms[i] = platforms1[i];
+            }
+            publisher = publisher1;
+        }
+        void read(int d)
+        {
+            String encoding = System.getProperty("console.encoding", "cp866");
+            Scanner in = new Scanner(System.in, encoding);
+            super.read();
+            System.out.println("Введите дату выхода(день, месяц(число), затем год(4 цифры), разделяя их нажатием Enter)");
+            release[0] = in.nextInt();
+            release[1] = in.nextInt();
+            release[2] = in.nextInt();
+            in.nextLine();
+            System.out.println("Введите платформы на которых доступна игра( чтобы закончить вводить платформы введите пустую строку)");
+            d = -1;
+            do
+            {
+                d++;
+                platforms[d] = in.nextLine();
+            } while (!platforms[d].equals(""));
+            System.out.println("Введите издателя");
+            publisher = in.nextLine();
+        }
+        public void display()
+        {        
+            System.out.println(ToString());
+        }
+        public String ToString()
+        {
+            int d;
+            String s;
+            s = "Код товара: " + code + "\n";
+            s += "Название товара: " + name + "\n";
+            s += "Цена: " + price + "\n";
+            s += "Колличество: " + amount + "\n";
+            s += "Дата выхода: " + release[0] + "." + release[1] + "." + release[2] + "\n";
+            s += "Платформы: ";
+            for (d = 0; d < platforms.length; d++)
+            {
+                s += platforms[d] + ", ";
+            }
+            s += "\n" + "Издатель: " + publisher;
+            return s;
+        }
+        public void add()
+        {
+            String encoding = System.getProperty("console.encoding", "cp866");
+            Scanner in = new Scanner(System.in, encoding);
+            int i;
+            i = 0;
+            while (!platforms[i].equals(""))
+            {
+                i++;
+            }
+            System.out.println("Введите платформу на которой доступна игра");
+            platforms[i] = in.nextLine();
+        }
+        public Object clone()
+        {
+            return new Game(code, name, price, amount, release, platforms, publisher);
+        }
+    }
+
+
+
+class Platform extends Item
+implements Add
+    {
+        String[] components = new String[10];
+        String[] plusPlatforms = new String[10];
+        String publisher;
+        public Platform()
+        {
+            name = "-";
+            code = "-";
+            price = 0;
+            amount = 0;
+            components[0] = "-";
+            plusPlatforms[0] = "-";
+            publisher = "-";
+        }
+        public Platform(String code, String name, double price, int amount, String[] components1, String[] platforms1, String publisher1)
+        {
+            super(code, name, price, amount);
+            int i;
+            for (i = 0; i < components1.length; i++)
+            {
+                components[i] = components1[i];
+            }
+            for (i = 0; i < platforms1.length; i++)
+            {
+                plusPlatforms[i] = platforms1[i];
+            }
+            publisher = publisher1;
+        }
+        public void read(int d)
+        {
+            String encoding = System.getProperty("console.encoding", "cp866");
+            Scanner in = new Scanner(System.in, encoding);
+            super.read();
+            System.out.println("Введите комплектацию( чтобы закончить вводить комплектацию введите пустую строку)");
+            d = -1;
+            do
+            {
+                d++;
+                components[d] = in.nextLine();
+            } while (!components[d].equals(""));
+            System.out.println("Введите платформы доступные по обратной совместимости( чтобы закончить вводить платформы введите пустую строку)");
+            d = -1;
+            do
+            {
+                d++;
+                plusPlatforms[d] = in.nextLine();
+            } while (!plusPlatforms[d].equals(""));
+            System.out.println("Введите издателя");
+            publisher = in.nextLine();
+        }
+        public void display()
+        {
+            System.out.println(ToString());
+        }
+        public String ToString()
+        {
+            int d;
+            String s;
+            s = "Код товара: " + code + "\n";
+            s += "Название товара: " + name + "\n";
+            s += "Цена: " + price + "\n";
+            s += "Колличество: " + amount + "\n";
+            s += "Комплектация: ";
+            for (d = 0; d < components.length; d++)
+            {
+                s += components[d] + ", ";
+            }
+            s += "\n" + "Платформы доступные по обратной совместимости: ";
+            for (d = 0; d < plusPlatforms.length; d++)
+            {
+                s += plusPlatforms[d] + ", ";
+            }
+            s += "\n" + "Издатель: " + publisher;
+            return s;
+        }
+        public void add()
+        {
+            String encoding = System.getProperty("console.encoding", "cp866");
+            Scanner in = new Scanner(System.in, encoding);
+            int i;
+            i = 0;
+            while (!components[i].equals(""))
+            {
+                i++;
+            }
+            System.out.println("Введите комплектующие");
+            components[i] = in.nextLine();
+        }
+    }
+
+
+
