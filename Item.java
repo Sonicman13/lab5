@@ -155,7 +155,12 @@ implements Add, Cloneable
         }
         public Object clone()
         {
-            return new Game(code, name, price, amount, release, platforms, publisher);
+            try{
+                return (Game)super.clone();
+            }
+            catch(CloneNotSupportedException e){
+                return this;
+            }
         }
     }
 

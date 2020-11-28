@@ -241,7 +241,7 @@ public class lab5 {
                 components[0] = "bbb";
                 platforms[0] = "zzz";
                 platform1[0] = new Platform("platform", "platform", 2, 2, components, platforms, "platform");
-                game1[1] = game1[0];
+                game1[1] = (Game)game1[0].clone();
                 game1[1].setAmount(2);
                 game1[0].display();
                 platform1[1] = platform1[0];
