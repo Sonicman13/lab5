@@ -6,7 +6,7 @@ interface Add
     void add();
 }
 
-public class Item {
+abstract class Item {
     protected String name;
     protected String code;
     protected double price;
@@ -47,12 +47,7 @@ public class Item {
         price = 0;
         amount = 0;
     }
-    void display(){
-        System.out.println("Название товара:" + name);
-        System.out.println("Код тоара:" + code);
-        System.out.println("Цена:" + price);
-        System.out.println("Колличество:" + amount);
-    }
+    abstract void display();
     void setPrice(double price1){
         price = price1;
     }

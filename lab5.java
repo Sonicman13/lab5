@@ -7,7 +7,6 @@ public class lab5 {
         String[] platforms = new String[10], components = new String[10], plusPlatforms = new String[10];
         Scanner in = new Scanner(System.in, encoding);
         Store[] store = new Store[10];
-        Item[] item1 = new Item[10];
         Game[] game1 = new Game[10];
         Platform[] platform1 = new Platform[10];
         Number k = new Number();
@@ -28,36 +27,6 @@ public class lab5 {
                 name1 = in.nextLine();
                 System.out.println("Введите адрес магазина");
                 adress1 = in.nextLine();
-                System.out.println("Добавить товар(1 - да, 0 - нет)");
-                f = in.nextLine();
-                i = 0;
-                while(f.equals("1")){
-                    System.out.println("Введите название товара");
-                    nameItem1 = in.nextLine();
-                    System.out.println("Введите код товара");
-                    code1 = in.nextLine();
-                    try{
-                        System.out.println("Введите цену");
-                        price1 = in.nextDouble();
-                    }
-                    catch(Exception e){
-                        price1 = 0;
-                        in.nextLine();
-                    }
-                    try{
-                        System.out.println("Введите колличество");
-                        amount1 = in.nextInt();
-                    }
-                    catch(Exception e){
-                        amount1 = 0;
-                    }
-                    in.nextLine();
-                    item1[i] = new Item(code1, nameItem1, price1, amount1);
-                    i++;
-                    System.out.println("Добавить товар(1 - да, 0 - нет)");
-                    f = in.nextLine();
-                }
-                numberOfItems1 = i;
                 System.out.println("Добавить игру(1 - да, 0 - нет)");
                 f = in.nextLine();
                 i = 0;
@@ -149,7 +118,7 @@ public class lab5 {
                     f = in.nextLine();
                 }
                 numberOfPlatforms1 = i;
-                store[0] = new Store(name1, adress1, numberOfItems1, item1, numberOfGames1, game1, numberOfPlatforms1, platform1);
+                store[0] = new Store(name1, adress1, numberOfGames1, game1, numberOfPlatforms1, platform1);
             }
             else if(f.equals("2")){
                 System.out.println("Введите название магазина");
