@@ -70,21 +70,6 @@ implements Comparable<Item>
     int getAmount(){
         return amount;
     }
-    public static final Comparator<Item> compareItem = new Comparator<Item>(){
-        @Override
-        public int compare(Item x, Item y){
-            double k;
-            k = x.price - y.price;
-            if(k > 0){
-                System.out.println("-");
-                return -1;
-            }
-            else{
-                System.out.println("+");
-                return 1;
-            }
-        }
-    };
     public int compareTo(Item x){
         double k;
         k = this.price - x.price;
