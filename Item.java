@@ -1,12 +1,17 @@
 import java.util.Scanner;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 interface Add
 {
     void add();
 }
 
-public class Item {
+public class Item 
+implements Comparable<Item>
+{
     protected String name;
     protected String code;
     protected double price;
@@ -64,6 +69,33 @@ public class Item {
     }
     int getAmount(){
         return amount;
+    }
+    public static final Comparator<Item> compareItem = new Comparator<Item>(){
+        @Override
+        public int compare(Item x, Item y){
+            double k;
+            k = x.price - y.price;
+            if(k > 0){
+                System.out.println("-");
+                return -1;
+            }
+            else{
+                System.out.println("+");
+                return 1;
+            }
+        }
+    };
+    public int compareTo(Item x){
+        double k;
+        k = this.price - x.price;
+        if(k > 0){
+            System.out.println("-");
+            return -1;
+        }
+        else{
+            System.out.println("+");
+            return 1;
+        }
     }
 }
 

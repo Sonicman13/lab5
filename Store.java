@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.*;
 
 public class Store {
     String name;
@@ -7,11 +11,14 @@ public class Store {
     static int maxNumberOfItems = 10;
     int numberOfGames;
     int numberOfPlatforms;
-    Item[] item = new Item[5];
-    Game[] game = new Game[5];
-    Platform[] platform = new Platform[5];
+    ArrayList<Item> item = new ArrayList<Item>();
+    ArrayList<Game> game = new ArrayList<Game>();
+    ArrayList<Platform> platform = new ArrayList<Platform>();
     void read(){
         int f,i;
+        Item[] item1 = new Item[10];
+        Game[] game1 = new Game[10];
+        Platform[] platform1 = new Platform[10];
         String encoding = System.getProperty("console.encoding", "cp866");
         Scanner in = new Scanner(System.in, encoding);
         System.out.println("Введите название магазина");
@@ -22,8 +29,9 @@ public class Store {
         f = in.nextInt();
         i = 0;
         while(f == 1 && i < maxNumberOfItems){
-            item[i] = new Item();
-            item[i].read();
+            item1[i] = new Item();
+            item1[i].read();
+            item.add(item1[i]);
             i++;
             System.out.println("Добавить товар(1 - да, 0 - нет)");
             f = in.nextInt();
@@ -33,8 +41,9 @@ public class Store {
         f = in.nextInt();
         i = 0;
         while(f == 1){
-            game[i] = new Game();
-            game[i].read(1);
+            game1[i] = new Game();
+            game1[i].read(1);
+            game.add(game1[i]);
             i++;
             System.out.println("Добавить игру(1 - да, 0 - нет)");
             f = in.nextInt();
@@ -44,8 +53,9 @@ public class Store {
         f = in.nextInt();
         i = 0;
         while(f == 1){
-            platform[i] = new Platform();
-            platform[i].read(1);
+            platform1[i] = new Platform();
+            platform1[i].read(1);
+            platform.add(platform1[i]);
             i++;
             System.out.println("Добавить консоль(1 - да, 0 - нет)");
             f = in.nextInt();
@@ -58,15 +68,15 @@ public class Store {
             adress = adress1;
             numberOfItems = numberOfItems1;
             for(numberOfItems1 = 0; numberOfItems1 < numberOfItems; numberOfItems1++){
-                item[numberOfItems1] = item1[numberOfItems1];
+                item.add(item1[numberOfItems1]);
             }
             numberOfGames = numberOfGames1;
             for(numberOfGames1 = 0; numberOfGames1 < numberOfGames; numberOfGames1++){
-                game[numberOfGames1] = game1[numberOfGames1];
+                game.add(game1[numberOfGames1]);
             }
             numberOfPlatforms = numberOfPlatforms1;
             for(numberOfPlatforms1 = 0; numberOfPlatforms1 < numberOfPlatforms; numberOfPlatforms1++){
-                platform[numberOfPlatforms1] = platform1[numberOfPlatforms1];
+                platform.add(platform1[numberOfPlatforms1]);
             }
         }
     }
@@ -92,17 +102,17 @@ public class Store {
         System.out.println("Колличество мест для товаров:" + maxNumberOfItems);
         for(i = 0;i < numberOfItems; i++){
             System.out.println("Товар:" + (i+1));
-            item[i].display();
+            item.get(i).display();
         }
         for (i = 0; i < numberOfGames; i++)
         {
             System.out.println("Игра " + (i + 1));
-            game[i].display();
+            game.get(i).display();
         }
         for (i = 0; i < numberOfPlatforms; i++)
         {
             System.out.println("Консоль " + (i + 1));
-            platform[i].display();
+            platform.get(i).display();
         }
     }
     void add(){
@@ -112,18 +122,21 @@ public class Store {
         System.out.println("Добавить товар (1), игру (2) или консоль (3)");
         f = in.nextInt();
         if(f == 1){
-            item[numberOfItems] = new Item();
-            item[numberOfItems].read();
+            Item item1 = new Item();
+            item1.read();
+            item.add(item1);
             numberOfItems++;
         }
         else if(f == 2){
-            game[numberOfGames] = new Game();
-            game[numberOfGames].read(1);
+            Game game1 = new Game();
+            game1.read(1);
+            game.add(game1);
             numberOfGames++;
         }
         else {
-            platform[numberOfPlatforms] = new Platform();
-            platform[numberOfPlatforms].read(1);
+            Platform platform1 = new Platform();
+            platform1.read(1);
+            platform.add(platform1);
             numberOfPlatforms++;
         }
     }
@@ -131,8 +144,8 @@ public class Store {
         int i, f;
         i = f = 0;
         while(i < numberOfItems){
-            if(code.equals(item[i].getCode())){
-                item[i].setPrice(price);
+            if(code.equals(item.get(i).getCode())){
+                item.get(i).setPrice(price);
                 i = numberOfItems;
                 f = 1;
             }
@@ -141,8 +154,8 @@ public class Store {
         if(f == 0){
             i = 0;
             while(i < numberOfGames){
-                if(code.equals(game[i].getCode())){
-                    game[i].setPrice(price);
+                if(code.equals(game.get(i).getCode())){
+                    game.get(i).setPrice(price);
                     i = numberOfGames;
                     f = 1;
                 }
@@ -152,8 +165,8 @@ public class Store {
         if(f == 0){
             i = 0;
             while(i < numberOfPlatforms){
-                if(code.equals(platform[i].getCode())){
-                    platform[i].setPrice(price);
+                if(code.equals(platform.get(i).getCode())){
+                    platform.get(i).setPrice(price);
                     i = numberOfPlatforms;
                     f = 1;
                 }
@@ -165,8 +178,8 @@ public class Store {
         int i, f;
         i = f = 0;
         while(i < numberOfItems){
-            if(code.equals(item[i].getCode())){
-                item[i].setAmount(amount);
+            if(code.equals(item.get(i).getCode())){
+                item.get(i).setAmount(amount);
                 i = numberOfItems;
             }
             i++;
@@ -174,8 +187,8 @@ public class Store {
         if(f == 0){
             i = 0;
             while(i < numberOfGames){
-                if(code.equals(game[i].getCode())){
-                    game[i].setAmount(amount);
+                if(code.equals(game.get(i).getCode())){
+                    game.get(i).setAmount(amount);
                     i = numberOfGames;
                     f = 1;
                 }
@@ -185,8 +198,8 @@ public class Store {
         if(f == 0){
             i = 0;
             while(i < numberOfPlatforms){
-                if(code.equals(platform[i].getCode())){
-                    platform[i].setAmount(amount);
+                if(code.equals(platform.get(i).getCode())){
+                    platform.get(i).setAmount(amount);
                     i = numberOfPlatforms;
                     f = 1;
                 }
@@ -217,9 +230,9 @@ public class Store {
         i = f = 0;
         while (i < numberOfGames)
         {
-            if (code.equals(game[i].getCode()))
+            if (code.equals(game.get(i).getCode()))
             {
-                game[i].add();
+                game.get(i).add();
                 i = numberOfGames;
                 f = 1;
             }
@@ -230,14 +243,19 @@ public class Store {
             i = 0;
             while (i < numberOfPlatforms)
             {
-                if (code.equals(platform[i].getCode()))
+                if (code.equals(platform.get(i).getCode()))
                 {
-                    platform[i].add();
+                    platform.get(i).add();
                     i = numberOfPlatforms;
                     f = 1;
                 }
                 i++;
             }
         }
+    }
+    void sortItems(){
+        Collections.sort(item);
+        Collections.sort(game);
+        Collections.sort(platform);
     }
 } 

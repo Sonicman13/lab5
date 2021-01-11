@@ -163,7 +163,7 @@ public class lab5 {
         f = "0";
         i = 0;
         max = 1;
-        while(f.equals("10") == false){
+        while(f.equals("11") == false){
             System.out.println("Введите номер следующего действия");
             System.out.println("1 - показать информацию о магазине");
             System.out.println("2 - добавить новый вид товара");
@@ -174,7 +174,8 @@ public class lab5 {
             System.out.println("7 - сменить магазин");
             System.out.println("8 - добавить комплектующие к консоли или платформы на которых доступна игра");
             System.out.println("9 - клонирование");
-            System.out.println("10 - выйти");
+            System.out.println("10 - сортировка");
+            System.out.println("11 - выйти");
             f = in.nextLine();
             if(f.equals("1")){
                 store[i].display();
@@ -247,6 +248,9 @@ public class lab5 {
                 platform1[1] = platform1[0];
                 platform1[1].setAmount(3);
                 platform1[0].display();
+            }
+            else if(f.equals("10")){
+                store[i].sortItems();
             }
         }    
     }
